@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>zkLand</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1">
+
+  <link rel="stylesheet" href="style.css">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/100/three.min.js"></script>
+  <script src="https://klevron.github.io/codepen/three.js/OrbitControls.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.0.3/chroma.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/simplex-noise/2.4.0/simplex-noise.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenMax.min.js"></script>
+
+  <script src="https://www.amcharts.com/lib/4/core.js"></script>
+  <script src="https://www.amcharts.com/lib/4/charts.js"></script>
+  <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+</head>
+
+<body>
+  <header>
+    <span class="image-clickable">
+      <a href="">
+        <img src="logos.png" alt="zkLand" class="logo" />
+      </a>
+    </span>
+    <nav>
+      <ul class="nav-links">
+        <li><span class="social">
+            <a href="https://twitter.com/zkland_org">
+              <img src="twitter.png" alt="Twitter" class="logo" />
+            </a>
+          </span></li>
+        <li><span class="social">
+            <a href="https://discord.gg/gpMkJ4ZnHz">
+              <img src="discord.png" alt="Discord" class="logo" />
+            </a>
+          </span></li>
+        <li><a href="#ecosystem">Ecosystem</a></li>
+        <li><a href="#tokenomics">Tokenomics</a></li>
+        <li><a href="#team">Team</a></li>
+        <li><a href="https://medium.com/@zklandorg">Docs</a></li>
+      </ul>
+    </nav>
+    <a href="https://sale.zkland.org/"><button class="join">Join the Pre-sale</button></a>
+  </header>
+
+  <div id="scene">
+    <canvas id="starfield" width="1500" height="731"></canvas>
+    <canvas id="planet" width="1500" height="1000"></canvas>
+  </div>
+
+  <div id="ecosystem" class="section">
+    <div class="eco selectDisable box shadow">
+      <p class="title">Become a space lord, own a planet to collect tax from your land vassals.</p>
+      <br><br>
+      <p class="property">total: 3000 planets</p>
+      <p class="property">initial cost / planet: 1 million ZKL</p>
+      <img src="img/planet.jpg" alt="planet" draggable="false">
+    </div>
+    <div class="eco selectDisable box shadow">
+      <p class="title">Be an interstellar farmer, claim a land to harvest its resources.</p>
+      <br><br>
+      <p class="property">total: 3000 x 100 lands</p>
+      <p class="property">initial cost / land: 10 000 ZKL</p>
+      <img src="img/land.jpg" alt="land" draggable="false">
+    </div>
+    <div class="eco selectDisable box shadow">
+      <p class="title">Use materials to build and increase your land's production.</p>
+      <br><br>
+      <p class="property">The ZKL token also functions as a super-material, change it to any other material 1 : 1</p>
+      <img src="img/material2.jpg" alt="market" draggable="false">
+    </div>
+    <div class="eco selectDisable box shadow">
+      <p class="title">Or sell them on the market to buy more planets or lands.</p>
+      <br>
+      <p class="property">You can claim any unclaimed land by consuming the required amount of ZKL.</p>
+      <p class="property">Cultivate your lands or list and sell them.</p>
+      <img src="img/market.jpg" alt="market" draggable="false">
+    </div>
+  </div>
+
+  <div id="tokenomics" class="section">
+    <div class="token box shadow chart">
+      <div id="chartdiv"></div>
+    </div>
+    <div class="token box shadow compare">
+      <div class="table-container">
+        <span>
+          <h1>zkLand (ZKL)</h1>
+        </span>
+        <table class="table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>%</th>
+              <th>Tokens</th>
+              <th>Use</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td>Pre-Sale</td>
+              <td>33.3 %</td>
+              <td>3000 million ZKL</td>
+              <td>Released based on contribution amount</td>
+            </tr>
+
+            <tr>
+              <td>LP</td>
+              <td>33.3 %</td>
+              <td>3000 million ZKL</td>
+              <td>To provide liquidity and for launchpad</td>
+            </tr>
+
+            <tr>
+              <td>DAO</td>
+              <td>13.3 %</td>
+              <td>1200 million ZKL</td>
+              <td>Locked, initially for LP, after launch by vote</td>
+            </tr>
+
+            <tr>
+              <td>Ecosystem</td>
+              <td>6.7 %</td>
+              <td>600 million ZKL</td>
+              <td>Used for the Game economics only</td>
+            </tr>
+
+            <tr>
+              <td>Farming</td>
+              <td>5.6 %</td>
+              <td>500 million ZKL</td>
+              <td>For token farming in the zkSync ecosystem</td>
+            </tr>
+
+            <tr>
+              <td>Team</td>
+              <td>5.6 %</td>
+              <td>500 million ZKL</td>
+              <td>Released over 2 years linearly</td>
+            </tr>
+
+            <tr>
+              <td>Marketing</td>
+              <td>2.2 %</td>
+              <td>200 million ZKL</td>
+              <td>Community rewards & Airdrops</td>
+            </tr>
+
+            <tr>
+              <td>Total supply</td>
+              <td>100 %</td>
+              <td>9000 million ZKL</td>
+              <td></td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div id="team" class="section">
+    <div class="team box shadow">
+      <p class="title">Wizzy</p>
+      <p class="position">Founder & Game Developer</p>
+      <br><br>
+      <span>
+        <img src="team/f1.png" alt="" class="team-img">
+      </span>
+    </div>
+    <div class="team box shadow">
+      <p class="title">Carizon</p>
+      <p class="position">EVM & Unity Developer</p>
+      <br><br>
+      <span>
+        <img src="team/f2.png" alt="" class="team-img">
+      </span>
+    </div>
+    <div class="team box shadow">
+      <p class="title">Kevi</p>
+      <p class="position">2D, 3D Graphic designer</p>
+      <br><br>
+      <span>
+        <img src="team/f3.png" alt="" class="team-img">
+      </span>
+    </div>
+    <div class="team box shadow">
+      <p class="title">Aleksder</p>
+      <p class="position">Web & EVM developer</p>
+      <br><br>
+      <span>
+        <img src="team/f4.png" alt="" class="team-img">
+      </span>
+    </div>
+    <div class="team box shadow">
+      <p class="title">Chowu</p>
+      <p class="position">EVM developer</p>
+      <br><br>
+      <span>
+        <img src="team/f5.png" alt="" class="team-img">
+      </span>
+    </div>
+    <div class="team box shadow">
+      <p class="title">Jeffi</p>
+      <p class="position">Marketing & Community</p>
+      <br><br>
+      <span>
+        <img src="team/f6.png" alt="" class="team-img">
+      </span>
+    </div>
+  </div>
+
+  <script src="planet.js"></script>
+  <script src="stars.js"></script>
+  <script src="chart.js"></script>
+</body>
+
+</html>
