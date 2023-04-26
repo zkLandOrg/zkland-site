@@ -18,7 +18,7 @@ var config = {
             value: 3000000000
         },
         {
-            token: "Liquidity & Launchpad",
+            token: "LP & Launchpad IDO",
             value: 3000000000
         },
         {
@@ -30,7 +30,7 @@ var config = {
             value: 600000000
         },
         {
-            token: "DAO & LP",
+            token: "DAO & Liquidity",
             value: 1200000000
         },
         {
